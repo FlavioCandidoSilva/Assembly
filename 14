@@ -1,0 +1,157 @@
+.text
+
+main:
+      addi $2,$0,5
+      syscall 
+      add $t0,$0,$2
+      
+     
+      
+   
+     
+    
+      addi $t1,$0,1000
+      addi $t2,$0,100
+      addi $t3,$0,10
+      
+     
+milhar:    
+      div $t0,$t1
+      mflo $t4
+      beq $t4,$0,virgula
+      addi $2,$0,1
+      add $4,$0,$t0
+      syscall 
+      j segundo
+      
+      
+centena:  
+      div $t0,$t2
+      mflo $t5
+      beq $t5,$0,espaço2
+      addi $2,$0,1
+      add $4,$0,$t0
+      syscall 
+       j segundo
+      
+      
+decimal:     
+      div $t0,$t3
+      mflo $t8
+      mfhi $t9
+      beq $t8,$0,espaço3
+      addi $2,$0,1
+      add $4,$0,$t0
+      syscall 
+      j segundo
+    
+
+unidade:
+        beq $t9,$0,zero
+
+zero: 
+        addi $2,$0,1
+	add $4,$0,$t0 
+	syscall   
+	
+	     
+                  
+virgula:
+	addi $2,$0,11
+	addi $4,$0,' '
+	syscall   
+	j centena
+	
+	
+espaço2:
+        addi $2,$0,11
+	addi $4,$0,' '  
+	syscall   
+	j  decimal
+	
+espaço3:
+        addi $2,$0,11
+	addi $4,$0,' '  
+	syscall   
+	j unidade
+	
+
+
+
+     
+   
+     
+   
+segundo:
+     
+milhar1:    
+      div $t0,$t1
+      mflo $t4
+      beq $t4,$0,virgula1
+      addi $2,$0,1
+      add $4,$0,$t9
+      syscall 
+      j fim
+      
+      
+centena1:  
+      div $t0,$t2
+      mflo $t5
+      beq $t5,$0,espaço21
+      addi $2,$0,1
+      add $4,$0,$t0
+      syscall 
+      j fim
+      
+      
+decimal1:     
+      div $t0,$t3
+      mflo $t8
+      mfhi $t9
+      beq $t8,$0,espaço31
+      addi $2,$0,1
+      add $4,$0,$t0
+      syscall 
+      j fim
+    
+
+unidade1:
+        beq $t9,$0,zero1
+
+zero1: 
+        addi $2,$0,1
+	add $4,$0,$t9
+	syscall   
+	j  fim
+	     
+                  
+virgula1:
+	addi $2,$0,11
+	addi $4,$0,','  
+	syscall   
+	j centena1
+	
+	
+espaço21:
+        addi $2,$0,11
+	addi $4,$0,' '  
+	syscall   
+	j  decimal1
+	
+espaço31:
+        addi $2,$0,11
+	addi $4,$0,' '  
+	syscall   
+	j unidade1
+	
+      
+      
+      
+      
+      
+fim:
+	addi $2,$0,10
+	syscall 
+      
+      
+      
